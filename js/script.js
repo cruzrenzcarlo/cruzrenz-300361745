@@ -3,10 +3,7 @@ const totalCountPageHeader = document.querySelector("div.page-header.cf");
 const totalCountH3 = totalCountPageHeader.querySelector("h3");
 totalCountH3.innerHTML = "Total: " + `${users.length}`;
 
-//this is displaying all users
-//get user list from data.js
-
-// used to iterate for each users in user and append in the ul
+// function to create list of users
 function createListItem(user) {
   // create a new <li> element
   const listItem = document.createElement("li");
@@ -101,7 +98,7 @@ const createPageNumberBtn = (page) => {
 
 
 const displayUsersList = (usersList, currentPage) => {
-  // empty list when switching page
+  // to empty the page when switching
   contactList.innerHTML = "";
 
   const initRange = (currentPage - 1) * itemsPerPage;
@@ -116,58 +113,3 @@ const displayUsersList = (usersList, currentPage) => {
 
 displayUsersList(users, currentPage);
 getPaginationNumbers();
-
-
-//this is a new comment
-
-
-
-
-
-
-
-
-
-// const handleActivePageNumber = () => {
-//   document.querySelectorAll(".pagination").forEach((button) => {
-//     button.classList.remove("active");
-//     const pageIndex = Number(button.getAttribute("page-index"));
-//     if (pageIndex == currentPage) {
-//       button.classList.add("active");
-//     }
-//   });
-// };
-
-
-// const setCurrentPage = (pageNum) => {
-//   currentPage = pageNum;
-//   handleActivePageNumber();
-//   const prevRange = (pageNum - 1) * itemsPerPage;
-//   const currRange = pageNum * itemsPerPage;
-//   listItemsPagination.forEach((item, index) => {
-//     item.classList.add("hidden");
-//     if (index >= prevRange && index < currRange) {
-//       item.classList.remove("hidden");
-//     }
-//   });
-// }
-
-// window.addEventListener("load", () => {
-//   getPaginationNumbers();
-//   setCurrentPage(1);
-
-//   document.querySelectorAll(".pagination").forEach((button) => {
-//     const pageIndex = Number(button.getAttribute("page-index"));
-//     if (pageIndex) {
-//       button.addEventListener("click", () => {
-//         setCurrentPage(pageIndex);
-//       });
-//     }
-//   });
-// });
-
-
-
-
-
-
