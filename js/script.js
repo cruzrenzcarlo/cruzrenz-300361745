@@ -66,7 +66,6 @@ const getPaginationNumbers = () => {
   }
 };
 
-//below this is not working - pagination function to retrieve per 10
 const paginationNumbersCreate = (page) => {
   
   const newButton = document.createElement("li");
