@@ -4,7 +4,7 @@ const totalCountH3 = totalCountPageHeader.querySelector("h3");
 totalCountH3.innerHTML = "Total: " + `${users.length}`;
 
 // function to create list of users
-function createListItem(user) {
+const createListItem = (user) => {
   // create a new <li> element
   const listItem = document.createElement("li");
   listItem.className = "contact-item cf";
@@ -61,39 +61,39 @@ let currentPage = 1;
 
 const getPaginationNumbers = () => {
   for (let i = 1; i <= totalPageCount; i++) {
-    const btn = createPageNumberBtn(i);
+    const btn = paginationNumbersCreate(i);
     paginationNumbers.appendChild(btn);
   }
 };
 
 //below this is not working - pagination function to retrieve per 10
-const createPageNumberBtn = (page) => {
-  // create pageNumber btn
-  const listBtn = document.createElement("li");
+const paginationNumbersCreate = (page) => {
+  
+  const newButton = document.createElement("li");
   const a = document.createElement("a");
   a.innerText = page;
-  listBtn.appendChild(a);
+  newButton.appendChild(a);
 
-  // add active className to current page
-  if (currentPage === page) a.classList.add("active");
-
-  // add onClick event listener to btn
-  listBtn.addEventListener("click", () => {
+  ///this is to set the active on the current page clicked
+  if (currentPage === page){
+    a.classList.add("active");
+  }
+  // listener
+  newButton.addEventListener("click", () => {
     // set currentPage to clicked btn and display users
     currentPage = page;
     displayUsersList(users, currentPage);
 
-    // remove active className of current active btn
+    // remove the active on previous button
     const currentBtn = document.querySelector(".pagination > li a.active");
- 
     currentBtn.classList.remove("active");
 
-    // add active className to clicked btn
-    let itemBtn = listBtn.querySelector("a");
-    itemBtn.classList.add("active");
+    // palce active on newly clicked button
+    let clickedButton = newButton.querySelector("a");
+    clickedButton.classList.add("active");
   });
 
-  return listBtn;
+  return newButton;
 };
 
 
@@ -103,13 +103,14 @@ const displayUsersList = (usersList, currentPage) => {
 
   const initRange = (currentPage - 1) * itemsPerPage;
   const newRange = initRange + itemsPerPage;
-  const newUsersList = usersList.slice(initRange, newRange);
 
-  newUsersList.forEach((user) => {
+  for(i=initRange; i < newRange && i < usersList.length; i++){
+    const user = usersList[i];
     const listItem = createListItem(user);
     contactList.appendChild(listItem);
-  });
+  }
 };
 
+//initial display of 10 users
 displayUsersList(users, currentPage);
 getPaginationNumbers();
